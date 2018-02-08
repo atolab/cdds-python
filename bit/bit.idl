@@ -1,0 +1,34 @@
+module dds {
+  module bit {
+    typedef sequence<octet> bytes;
+
+    struct SKeyBValue {
+      string key;
+      bytes value;
+    };
+    #pragma keylist SKeyBValue key
+
+    struct IKeyBValue {
+      long key;
+      bytes value;
+    };
+    #pragma keylist IKeyBValue key
+
+    struct IKeySValue {
+      long key;
+      string value;
+    };
+    #pragma keylist IKeySValue key
+
+    struct SKeySValue {
+      string key;
+      string value;
+    };
+    #pragma keylist SKeySValue key
+
+    struct SValue {
+      string value;
+    };
+    #pragma  keylist SValue
+  };
+};

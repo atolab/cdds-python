@@ -1,0 +1,45 @@
+# DDS Python API
+
+## Overview
+**pycham** is a simple Python API for Chameleon
+
+This API supports:
+
+- **IDL-based Topic Types**. In this case the equivalent python type 
+  has to be defined using the appropriate ctype structure.
+  
+- **Python Objects**. Python objects can be used as Topic types, in this
+  case the wire representation is that of flexy-types, meaning a 
+  key/value pair.
+  
+Regardless of the kinds of type definition interoperability and instance management are maintained (see code examples).
+
+## Installation
+**pydds** depends on:
+
+- [**jsonpikle**](https://github.com/jsonpickle/jsonpickle), please refer to the project page for installation informations.
+
+- [**OpenSplice**](https://github.com/ADLINK-IST/opensplice), refer to the installation instructions to see how to get it set up.
+as
+Once the dependencies are intalled simply do (assuming your are running on Linux):
+
+	$ cd dds-python
+	$ ./configure.linux
+	$ python3 setup.py install 
+
+To test your installation do:
+
+	$ python test_reader.py &
+	$ python test_writer.py 
+	
+
+Equivalently you can test the flexy types by:
+
+	$ python test_flexy_writer.py 
+	$ python test_flexy_reader.py 
+
+
+
+
+
+ 

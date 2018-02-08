@@ -1,0 +1,16 @@
+# -*-Makefile-*-
+#!/bin/bash
+
+BIT_LIB=libddstubs.dylib
+
+pushd &> /dev/null
+cd bit
+rm -Rf build
+mkdir build
+cd build
+cmake ..
+make
+cp ${BIT_LIB} /usr/local/lib
+
+popd &> /dev/null
+
