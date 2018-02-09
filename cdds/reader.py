@@ -2,20 +2,20 @@ from .dds_binding import *
 import jsonpickle
 from .runtime import Runtime
 
-
-def trivial_on_liveliness_changed(r, s):
-    Runtime.dispatch_liveliness_changed_listener(c_void_p(r), s)
+@LIVELINESS_CHANGED_PROTO
+def trampoline_on_liveliness_changed(r, s, a):
+    Runtime.dispatch_liveliness_changed_listener(r, s)
 
 @DATA_AVAILABLE_PROTO
-def trivial_on_data_available(r, a):
+def trampoline_on_data_available(r, a):
     Runtime.dispatch_data_listener(r)
 
-
-def trivial_on_subscription_matched(e, s):
+@SUBSCRIPTION_MATCHED_PROTO
+def trampoline_on_subscription_matched(e, s, a):
     Runtime.dispatch_subscription_matched_listener(e, s)
 
-
-def trivial_on_sample_lost(e, s):
+@SAMPLE_LOST_PROTO
+def trampoline_on_sample_lost(e, s, a):
     global logger
     logger.debug('DefaultListener', '>> Sample Lost')
 
@@ -64,12 +64,15 @@ class FlexyReader:
 
         topic = self.flexy_topic.topic
 
+        self.listener_handle = self.rt.ddslib.dds_listener_create(None)
+        self.rt.ddslib.dds_lset_data_available(self.listener_handle , trampoline_on_data_available)
+        self.rt.ddslib.dds_lset_liveliness_changed(self.listener_handle, trampoline_on_liveliness_changed)
+        self.rt.ddslib.dds_lset_subscription_matched(self.listener_handle, trampoline_on_subscription_matched)
+
         if kind is None or kind == DDS_State:
-            # self.handle = self.rt.stublib.s_create_state_reader(sub.handle, topic) # , callback)
-            self.handle = self.rt.stublib.s_create_state_reader_wl(sub.handle, topic, trivial_on_data_available)
+            self.handle = self.rt.stublib.s_create_state_reader_wl(sub.handle, topic, self.listener_handle )
         else:
-            # self.handle = self.rt.stublib.s_create_state_reader(sub.handle, topic) #, callback)
-            self.handle = self.rt.stublib.s_create_event_reader_wl(sub.handle, topic, trivial_on_data_available)
+            self.handle = self.rt.stublib.s_create_event_reader_wl(sub.handle, topic, self.listener_handle )
 
         self.rt.register_data_listener(self.handle, self.__handle_data)
 

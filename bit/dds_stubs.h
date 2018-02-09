@@ -27,8 +27,12 @@ dds_entity_t s_create_sub_wp(dds_entity_t dp, const char* partition);
 dds_entity_t s_create_state_reader(dds_entity_t s, dds_entity_t t);
 dds_entity_t s_create_event_reader(dds_entity_t s, dds_entity_t t);
 
-dds_entity_t s_create_state_reader_wl(dds_entity_t s, dds_entity_t t,  dds_on_data_available_fn f);
-dds_entity_t s_create_event_reader_wl(dds_entity_t s, dds_entity_t t,  dds_on_data_available_fn  f);
+dds_entity_t s_create_state_reader_wf(dds_entity_t s, dds_entity_t t,  dds_on_data_available_fn f);
+dds_entity_t s_create_event_reader_wf(dds_entity_t s, dds_entity_t t,  dds_on_data_available_fn  f);
+
+dds_entity_t s_create_state_reader_wl(dds_entity_t s, dds_entity_t t,  dds_listener_t* l);
+dds_entity_t s_create_event_reader_wl(dds_entity_t s, dds_entity_t t,  dds_listener_t* l);
+
 
 dds_entity_t s_create_state_writer(dds_entity_t p, dds_entity_t t);
 dds_entity_t s_create_event_writer(dds_entity_t p, dds_entity_t t);

@@ -25,12 +25,15 @@ class VehiclePosition(Topic):
     def __str__(self):
         return 'VehiclePosition({0}, {1}, {2})'.format(self.key_, self.x, self.y)
 
-def onDataAvailable(r):
+def data_available(r):
     print('reader>> Listenerr Called!')
     samples = r.read(all_samples())
     for s in samples:
         if s[1].valid_data:
             print ('reader>> {0})'.format(s[0]))
+
+def liveliness_changed(r, e):
+    print(">>>>> Changed Liveliness!!")
 
 def testDynaTypes():
     rt = Runtime()
@@ -39,7 +42,8 @@ def testDynaTypes():
     t = FlexyTopic(dp,  'KeyValue') #,None, [Reliable(), Persistent(), KeepLastHistory(1)])
     # s = Subscriber(dp, [Partition(['cdds-python.demo'])])
 
-    dr = FlexyReader(dp, t, onDataAvailable, DDS_State) #, [Reliable(), Persistent(), KeepLastHistory(1)], None)
+    dr = FlexyReader(dp, t, data_available, DDS_State) #, [Reliable(), Persistent(), KeepLastHistory(1)], None)
+    dr.on_liveliness_changed(liveliness_changed)
 
     # while True:
     #     samples = dr.read(all_samples())

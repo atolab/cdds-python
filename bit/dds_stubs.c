@@ -119,8 +119,21 @@ void callme_back(dds_on_data_available_fn f) {
   f(0, NULL);
 }
 
+
 dds_entity_t
-s_create_state_reader_wl(dds_entity_t s, dds_entity_t t,  dds_on_data_available_fn f) {
+s_create_state_reader_wl(dds_entity_t s, dds_entity_t t,  dds_listener_t* l) {
+  return dds_create_reader(s, t, dds_state_qos(1), l);
+}
+
+
+dds_entity_t
+s_create_event_reader_wl(dds_entity_t s, dds_entity_t t,  dds_listener_t* l) {
+  return dds_create_reader(s, t, dds_event_qos(), l);
+}
+
+
+dds_entity_t
+s_create_state_reader_wf(dds_entity_t s, dds_entity_t t,  dds_on_data_available_fn f) {
   dds_listener_t* l = dds_listener_create(NULL);
   dds_lset_data_available(l, f);
   return dds_create_reader(s, t, dds_state_qos(1), l);
@@ -128,7 +141,7 @@ s_create_state_reader_wl(dds_entity_t s, dds_entity_t t,  dds_on_data_available_
 
 
 dds_entity_t
-s_create_event_reader_wl(dds_entity_t s, dds_entity_t t,  dds_on_data_available_fn  f) {
+s_create_event_reader_wf(dds_entity_t s, dds_entity_t t,  dds_on_data_available_fn  f) {
   dds_listener_t* l = dds_listener_create(NULL);
   dds_lset_data_available(l, f);
   return dds_create_reader(s, t, dds_event_qos(), l);

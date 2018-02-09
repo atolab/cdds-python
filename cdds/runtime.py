@@ -69,11 +69,11 @@ class Runtime:
 
         # dds_entity_t s_create_state_reader_wl(dds_entity_t s, dds_entity_t t, dds_on_data_available_fn f);
         self.stublib.s_create_state_reader_wl.restype = c_void_p
-        self.stublib.s_create_state_reader_wl.argtypes = [c_void_p, c_void_p, DATA_AVAILABLE_PROTO]
+        self.stublib.s_create_state_reader_wl.argtypes = [c_void_p, c_void_p, c_void_p]
 
         # dds_entity_t s_create_event_reader_wl(dds_entity_t s, dds_entity_t t, dds_on_data_available_fn f);
         self.stublib.s_create_state_reader_wl.restype = c_void_p
-        self.stublib.s_create_state_reader_wl.argtypes = [c_void_p, c_void_p, DATA_AVAILABLE_PROTO]
+        self.stublib.s_create_state_reader_wl.argtypes = [c_void_p, c_void_p, c_void_p]
 
         # dds_entity_t s_create_state_writer(dds_entity_t  s, dds_entity_t  t);
         self.stublib.s_create_state_writer.restype = c_void_p
@@ -194,6 +194,18 @@ class Runtime:
         self.ddslib.dds_create_readcondition.restype = c_void_p
         self.ddslib.dds_create_readcondition.argtypes = [c_void_p, c_uint32]
 
+        # -- Listeners --
+        self.ddslib.dds_listener_create.restype = c_void_p
+        self.ddslib.dds_listener_create.argtypes = [c_void_p]
+
+        self.ddslib.dds_lset_data_available.restype = None
+        self.ddslib.dds_lset_data_available.argtypes = [c_void_p, DATA_AVAILABLE_PROTO]
+
+        self.ddslib.dds_lset_liveliness_changed.restype = None
+        self.ddslib.dds_lset_liveliness_changed.argtypes = [c_void_p, LIVELINESS_CHANGED_PROTO]
+
+        self.ddslib.dds_lset_subscription_matched.restype = None
+        self.ddslib.dds_lset_subscription_matched.argtypes = [c_void_p, SUBSCRIPTION_MATCHED_PROTO]
 
         global the_runtime
         the_runtime = self
@@ -213,18 +225,18 @@ class Runtime:
     @staticmethod
     def dispatch_data_listener(handle):
         h = repr(handle)
-        global the_runtime
+        the_runtime = Runtime.get_runtime()
         if h in the_runtime.dataListenerMap:
             fun = the_runtime.dataListenerMap[h]
             fun(handle)
         else:
             global logger
-            logger.warning('DDSRuntime', 'Trying to dispatch listener for unknown reader {0}'.format(handle))
+            logger.warning('DDSRuntime', 'Trying to dispatch data listener for unknown reader {0}'.format(handle))
 
     @staticmethod
     def dispatch_subscription_matched_listener(handle, s):
         h = repr(handle)
-        global the_runtime
+        the_runtime = Runtime.get_runtime()
         if h in the_runtime.subscriptionMatchedListenerMap:
             fun = the_runtime.subscriptionMatchedListenerMap[h]
             fun(handle, s)
@@ -232,10 +244,13 @@ class Runtime:
     @staticmethod
     def dispatch_liveliness_changed_listener(handle, s):
         h = repr(handle)
-        global the_runtime
+        the_runtime = Runtime.get_runtime()
         if h in the_runtime.livelinessChangeListenerMap:
             fun = the_runtime.livelinessChangeListenerMap[h]
             fun(handle, s)
+        else:
+            global logger
+            logger.warning('DDSRuntime', 'Trying to dispatch liveliness listener for unknown reader {0}'.format(handle))
 
     def get_key_value_type_support(self):
         return self.stublib.dds_bit_SKeySValue_desc
@@ -286,6 +301,7 @@ class Runtime:
 
     def release_dds_qos(self, qos):
         self.ddslib.dds_qos_delete(qos)
+
 
     def close(self):
         self.ddslib.dds_fini()
