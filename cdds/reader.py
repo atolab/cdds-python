@@ -70,9 +70,9 @@ class FlexyReader:
         self.rt.ddslib.dds_lset_subscription_matched(self.listener_handle, trampoline_on_subscription_matched)
 
         if kind is None or kind == DDS_State:
-            self.handle = self.rt.stublib.s_create_state_reader_wl(sub.handle, topic, self.listener_handle )
+            self.handle = self.rt.stublib.s_create_state_reader_wl(sub.handle, topic, self.listener_handle)
         else:
-            self.handle = self.rt.stublib.s_create_event_reader_wl(sub.handle, topic, self.listener_handle )
+            self.handle = self.rt.stublib.s_create_event_reader_wl(sub.handle, topic, self.listener_handle)
 
         self.rt.register_data_listener(self.handle, self.__handle_data)
 
