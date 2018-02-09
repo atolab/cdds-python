@@ -1,7 +1,7 @@
 __author__ = 'Angelo Corsaro'
 
 from cdds import *
-import  time
+import time
 
 # TODO: Factor out the definition of Vehicle position...
 class VehiclePosition(Topic):
