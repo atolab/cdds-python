@@ -6,6 +6,12 @@ if (NOT TARGET VortexDDS::ddsc)
     find_package(VortexDDS REQUIRED PATHS "${CMAKE_SOURCE_DIR}/../../")
 endif()
 
+
+
+include_directories(
+        "/usr/local/include"
+)
+
 # This is a convenience function, provided by the VortexDDS package,
 # that will supply a library target related the the given idl file.
 # In short, it takes the idl file, generates the source files with
