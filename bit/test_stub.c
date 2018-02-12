@@ -30,6 +30,7 @@ void run_sub() {
   dds_entity_t s = s_create_sub(dp);
   // dds_entity_t s = s_create_sub_wp(dp, "alpha");
   dds_entity_t t = s_create_topic_sksv(dp, "KeyValue");
+  dds_entity_t t2 = s_create_topic_sksv(dp, "KeyValue");
   
   dds_entity_t r = s_create_state_reader_wf(s, t, listener);
 

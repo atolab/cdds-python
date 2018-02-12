@@ -14,6 +14,7 @@ class FlexyTopic:
             self.keygen = keygen
 
         self.topic = self.rt.stublib.s_create_topic_sksv(dp.handle, name.encode())
+        assert (self.topic > 0)
         self.type_support = self.rt.get_key_value_type_support()
         self.data_type = DDSKeyValue
         self.dp = dp
