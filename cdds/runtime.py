@@ -111,14 +111,53 @@ class Runtime:
         self.stublib.s_take_sv.restype = POINTER(DDSKeyValue)
         self.stublib.s_take_sv.argtypes = [dds_entity_t]
 
-        # Chameleon has changed the listener API.
-        # self.on_requested_deadline_missed = REQUESTED_DEADLINE_MISSED_PROTO(trivial_on_requested_deadline_missed)
-        # self.on_requested_incompatible_qos = REQUESTED_INCOMPATIBLE_QOS_PROTO(trivial_on_requested_incompatible_qos)
-        # self.on_sample_rejected = SAMPLE_REJECTED_PROTO(trivial_on_sample_rejected)
-        # self.on_liveliness_changed = LIVELINESS_CHANGED_PROTO(trivial_on_liveliness_changed)
-        # self.on_data_available = DATA_AVAILABLE_PROTO(trivial_on_data_available)
-        # self.on_subscription_matched = SUBSCRIPTION_MATCHED_PROTO(trivial_on_subscription_matched)
-        # self.on_sample_lost = SAMPLE_LOST_PROTO(trivial_on_sample_lost)
+        # -- Participant Operations --
+        self.ddslib.dds_create_participant.restype = dds_entity_t
+        self.ddslib.dds_create_participant.argtypes = [dds_domainid_t, dds_qos_p_t, dds_listener_p_t]
+
+        self.ddslib.dds_get_parent.restype = dds_entity_t
+        self.ddslib.dds_get_parent.argtypes = [dds_entity_t]
+
+        self.ddslib.dds_get_participant.restype = dds_entity_t
+        self.ddslib.dds_get_participant.argtypes = [dds_entity_t]
+
+        # -- Topic Operations --
+        self.ddslib.dds_create_topic.restype = dds_entity_t
+        self.ddslib.dds_create_topic.argtypes = [dds_entity_t, dds_topic_descriptor_p_t, c_char_p, dds_qos_p_t, dds_listener_p_t]
+
+        self.ddslib.dds_find_topic.restype = dds_entity_t
+        self.ddslib.dds_find_topic.argtypes = [dds_entity_t, c_char_p]
+
+
+        # -- Publisher / Subscriber Operations --
+
+        self.ddslib.dds_create_publisher.restype = dds_entity_t
+        self.ddslib.dds_create_publisher.argtypes = [dds_entity_t, dds_qos_p_t, dds_listener_p_t]
+
+        self.ddslib.dds_create_subscriber.restype = dds_entity_t
+        self.ddslib.dds_create_subscriber.argtypes = [dds_entity_t, dds_qos_p_t, dds_listener_p_t]
+
+        self.ddslib.dds_get_subscriber.restype = dds_entity_t
+        self.ddslib.dds_get_subscriber.argtypes = [dds_entity_t]
+
+        self.ddslib.dds_get_publisher.restype = dds_entity_t
+        self.ddslib.dds_get_publisher.argtypes = [dds_entity_t]
+
+        # -- Reader  / Writer Operations --
+        self.ddslib.dds_create_reader.restype = dds_entity_t
+        self.ddslib.dds_create_reader.argtypes = [dds_entity_t, dds_entity_t, dds_qos_p_t, dds_listener_p_t]
+
+        self.ddslib.dds_reader_wait_for_historical_data.restype = dds_return_t
+        self.ddslib.dds_reader_wait_for_historical_data.argtypes = [dds_entity_t, dds_duration_t]
+
+        self.ddslib.dds_get_datareader.restype = dds_entity_t
+        self.ddslib.dds_get_datareader.argtypes = [dds_entity_t]
+
+        self.ddslib.dds_wait_for_acks.restype = dds_return_t
+        self.ddslib.dds_wait_for_acks.argtypes = [dds_entity_t, dds_duration_t]
+
+        self.ddslib.dds_create_writer.restype = dds_entity_t
+        self.ddslib.dds_create_writer.argtypes = [dds_entity_t, dds_entity_t, dds_qos_p_t, dds_listener_p_t]
 
         # -- QoS operations --
         self.ddslib.dds_qos_create.restype = dds_qos_p_t

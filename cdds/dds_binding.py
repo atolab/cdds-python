@@ -107,8 +107,6 @@ DDS_LIVELINESS_AUTOMATIC = 0
 DDS_LIVELINESS_MANUAL_BY_PARTICIPANT = 1
 DDS_LIVELINESS_MANUAL_BY_TOPIC = 2
 
-DDS_State = 0
-DDS_Event = 1
 
 def dds_secs(n):
     return n*1000000000
@@ -171,6 +169,8 @@ dds_instance_state_t = c_int
 dds_qos_p_t = c_void_p
 dds_attach_t = c_void_p
 dds_listener_p_t = c_void_p
+dds_topic_descriptor_p_t = c_void_p
+dds_return_t = c_int32
 
 REQUESTED_DEADLINE_MISSED_PROTO = CFUNCTYPE(None, c_void_p, c_void_p, c_void_p)
 REQUESTED_INCOMPATIBLE_QOS_PROTO = CFUNCTYPE(None, c_void_p, c_void_p, c_void_p)

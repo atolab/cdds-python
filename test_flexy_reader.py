@@ -41,7 +41,7 @@ def testDynaTypes():
 
     t = FlexyTopic(dp,  'KeyValue')
 
-    dr = FlexyReader(dp, t, data_available, DDS_State)
+    dr = FlexyReader(dp, t, data_available, [Reliable(), KeepLastHistory(10)])
     dr.on_liveliness_changed(liveliness_changed)
 
     # while True:

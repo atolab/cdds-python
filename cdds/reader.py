@@ -47,7 +47,7 @@ def not_alive_instance_samples():
 
 
 class FlexyReader:
-    def __init__(self, sub, flexy_topic, flexy_data_listener = None, kind = None):
+    def __init__(self, sub, flexy_topic, flexy_data_listener = None, ps = None):
         self.rt = Runtime.get_runtime()
         self.dp = sub.dp
         self.sub = sub
@@ -56,6 +56,8 @@ class FlexyReader:
             self.data_listener = do_nothing
         else:
             self.data_listener = flexy_data_listener
+
+        self.qos = self.rt.to_rw_qos(ps)
 
         self.subsciption_listener = None
         self._liveliness_listener = None
@@ -69,11 +71,7 @@ class FlexyReader:
         self.rt.ddslib.dds_lset_liveliness_changed(self.listener_handle, trampoline_on_liveliness_changed)
         self.rt.ddslib.dds_lset_subscription_matched(self.listener_handle, trampoline_on_subscription_matched)
 
-        if kind is None or kind == DDS_State:
-            self.handle = self.rt.stublib.s_create_state_reader_wl(sub.handle, topic, self.listener_handle)
-        else:
-            self.handle = self.rt.stublib.s_create_event_reader_wl(sub.handle, topic, self.listener_handle)
-
+        self.handle = self.rt.ddslib.dds_create_reader(sub.handle, topic, self.qos, self.listener_handle)
         assert (self.handle > 0)
         self.rt.register_data_listener(self.handle, self.__handle_data)
 
@@ -180,5 +178,5 @@ class FlexyReader:
         return zip(data, infos)
 
     def wait_history(self, timeout):
-        return the_runtime.ddslib.dds_reader_wait_for_historical_data(self.handle, timeout)
+        return self.rt.ddslib.dds_reader_wait_for_historical_data(self.handle, timeout)
 

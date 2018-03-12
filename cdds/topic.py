@@ -13,9 +13,11 @@ class FlexyTopic:
         else:
             self.keygen = keygen
 
-        self.topic = self.rt.stublib.s_create_topic_sksv(dp.handle, name.encode())
-        assert (self.topic > 0)
+        self.qos = self.rt.to_rw_qos(qos)
         self.type_support = self.rt.get_key_value_type_support()
+        self.topic = self.rt.ddslib.dds_create_topic(dp.handle, self.type_support , name.encode(), self.qos, None)
+        self.handle = self.topic
+        assert (self.topic > 0)
         self.data_type = DDSKeyValue
         self.dp = dp
 
@@ -25,13 +27,12 @@ class FlexyTopic:
 
 class Topic:
     def __init__(self, dp, topic_name, type_support, data_type, qos):
-        global the_runtime
-        self.rt = the_runtime
+        self.rt = Runtime.get_runtime()
         self.topic_name = topic_name
         self.type_support = type_support
         self.data_type = data_type
         self.qos = self.rt.to_rw_qos(qos)
 
-        self.handle = c_void_p()
-        self.rt.ddslib.dds_create_topic(dp.handle, byref(self.handle), type_support, topic_name.encode(), self.qos, None)
-
+        self.topic = self.rt.ddslib.dds_create_topic(dp.handle, type_support, topic_name.encode(), self.qos, None)
+        self.handle = self.topic
+        assert (self.handle > 0)

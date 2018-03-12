@@ -44,7 +44,7 @@ if __name__ == '__main__':
     t = FlexyTopic(dp, 'KeyValue') #, None, [Reliable(),Persistent(), KeepLastHistory(1)])
 
     # p = Publisher(dp, 'cdds-python.demo')
-    w = FlexyWriter(dp, t)
+    w = FlexyWriter(dp, t, [Reliable(), KeepLastHistory(10)])
 
     vpos = VehiclePosition(cid)
     dx = 1

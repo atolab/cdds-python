@@ -77,3 +77,9 @@ class AutoInstanceDispose(Policy):
         Policy.__init__(self, DDS_WRITERDATALIFECYCLE_QOS_POLICY_ID)
         self.auto_dispose = True
 
+
+DDS_V_State = [Reliable(), KeepLastHistory(1), Volatile()]
+DDS_TL_State = [Reliable(), KeepLastHistory(1), TransientLocal()]
+DDS_State = DDS_V_State
+
+DDS_Event = [Reliable(), KeepAllHistory()]
