@@ -9,7 +9,7 @@ dds_qos_t*
 create_dds_state_qos(int32_t depth) {
   dds_qos_t* state_qos = dds_qos_create();
   dds_qset_reliability(state_qos, DDS_RELIABILITY_RELIABLE, DDS_INFINITY);
-  dds_qset_durability(state_qos, DDS_DURABILITY_TRANSIENT_LOCAL);
+  dds_qset_durability(state_qos, DDS_DURABILITY_VOLATILE);
   dds_qset_history(state_qos, DDS_HISTORY_KEEP_LAST, depth);
   dds_qset_writer_data_lifecycle(state_qos, false);
   return state_qos;

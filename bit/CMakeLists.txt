@@ -11,6 +11,7 @@ endif()
 include_directories(
         "/usr/local/include"
 )
+link_directories("/usr/local/lib")
 
 # This is a convenience function, provided by the CycloneDDS package,
 # that will supply a library target related the the given idl file.
