@@ -1,7 +1,12 @@
 # -*-Makefile-*-
 #!/bin/bash
 
-BIT_LIB=libddstubs.dylib
+
+if [ "$(uname)" == "Darwin" ]; then
+    BIT_LIB=libddstubs.dylib
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    BIT_LIB=libddstubs.so
+fi
 
 pushd &> /dev/null
 cd bit
