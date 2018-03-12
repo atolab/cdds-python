@@ -15,6 +15,7 @@ const dds_topic_descriptor_t* ikey_svalue();
 const dds_topic_descriptor_t* svalue();
 
 dds_entity_t s_create_participant(int id);
+
 dds_entity_t s_create_topic_sksv(dds_entity_t dp, const char* name);
 dds_entity_t s_create_topic_sv(dds_entity_t dp, const char* name);
 

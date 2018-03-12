@@ -67,7 +67,7 @@ s_create_participant(int id) {
 
 dds_entity_t
 s_create_topic_sksv(dds_entity_t dp, const char* name) {
-  return dds_create_topic(dp, &dds_bit_SKeySValue_desc, name, NULL, NULL);
+    return dds_create_topic(dp, &dds_bit_SKeySValue_desc, name, NULL, NULL);
 }
 
 dds_entity_t

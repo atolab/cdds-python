@@ -5,4 +5,5 @@ class Participant:
         self.rt = Runtime.get_runtime()
         self.did = did
         self.handle = self.rt.stublib.s_create_participant(did)
+        assert (self.handle > 0)
         self.dp = self

@@ -9,3 +9,5 @@ class Publisher:
             self.handle = self.rt.stublib.s_create_pub(self.dp.handle)
         else:
             self.handle = self.rt.stublib.s_create_pub_wp(self.dp.handle, partition.encode())
+
+        assert (self.handle > 0)

@@ -10,3 +10,5 @@ class Subscriber:
         else:
             self.handle = self.rt.stublib.s_create_sub_wp(self.dp.handle, partition.encode())
 
+        assert (self.handle  > 0)
+

@@ -40,6 +40,7 @@ def testDynaTypes():
     dp = Participant(0)
 
     t = FlexyTopic(dp,  'KeyValue') #,None, [Reliable(), Persistent(), KeepLastHistory(1)])
+    t1 = FlexyTopic(dp, 'KeyValue')  # ,None, [Reliable(), Persistent(), KeepLastHistory(1)])
     # s = Subscriber(dp, [Partition(['cdds-python.demo'])])
 
     dr = FlexyReader(dp, t, data_available, DDS_Event) #, [Reliable(), Persistent(), KeepLastHistory(1)], None)

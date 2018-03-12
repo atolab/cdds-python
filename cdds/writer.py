@@ -11,6 +11,7 @@ class FlexyWriter:
         else:
             self.handle = self.rt.stublib.s_create_event_writer(pub.handle, flexy_topic.topic)
 
+        assert (self.handle > 0)
         self.keygen = flexy_topic.gen_key
 
     def write(self, s):

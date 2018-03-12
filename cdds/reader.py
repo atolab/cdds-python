@@ -74,6 +74,7 @@ class FlexyReader:
         else:
             self.handle = self.rt.stublib.s_create_event_reader_wl(sub.handle, topic, self.listener_handle)
 
+        assert (self.handle > 0)
         self.rt.register_data_listener(self.handle, self.__handle_data)
 
 
