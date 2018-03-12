@@ -39,11 +39,9 @@ def testDynaTypes():
     rt = Runtime()
     dp = Participant(0)
 
-    t = FlexyTopic(dp,  'KeyValue') #,None, [Reliable(), Persistent(), KeepLastHistory(1)])
-    t1 = FlexyTopic(dp, 'KeyValue')  # ,None, [Reliable(), Persistent(), KeepLastHistory(1)])
-    # s = Subscriber(dp, [Partition(['cdds-python.demo'])])
+    t = FlexyTopic(dp,  'KeyValue')
 
-    dr = FlexyReader(dp, t, data_available, DDS_Event) #, [Reliable(), Persistent(), KeepLastHistory(1)], None)
+    dr = FlexyReader(dp, t, data_available, DDS_State)
     dr.on_liveliness_changed(liveliness_changed)
 
     # while True:

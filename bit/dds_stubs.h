@@ -5,6 +5,9 @@
 #include "bit.h"
 
 dds_qos_t* create_dds_state_qos(int32_t depth);
+dds_qos_t* create_dds_v_state_qos(int32_t depth);
+dds_qos_t* create_dds_tl_state_qos(int32_t depth);
+
 dds_qos_t* create_dds_event_qos();
 const dds_topic_descriptor_t* skey_bvalue();
 const dds_topic_descriptor_t* skey_svalue();

@@ -160,6 +160,17 @@ class SampleInfo(Structure):
         return self.instance_state == DDS_NOT_ALIVE_NO_WRITERS_INSTANCE_STATE
 
 
+dds_entity_t = c_int32
+dds_time_t = c_int64
+dds_duration_t = c_int64
+dds_instance_handle_t = c_int64
+dds_domainid_t = c_int32
+dds_sample_state_t = c_int
+dds_view_state_t = c_int
+dds_instance_state_t = c_int
+dds_qos_p_t = c_void_p
+dds_attach_t = c_void_p
+dds_listener_p_t = c_void_p
 
 REQUESTED_DEADLINE_MISSED_PROTO = CFUNCTYPE(None, c_void_p, c_void_p, c_void_p)
 REQUESTED_INCOMPATIBLE_QOS_PROTO = CFUNCTYPE(None, c_void_p, c_void_p, c_void_p)
