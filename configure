@@ -15,7 +15,11 @@ mkdir build
 cd build
 cmake ..
 make
-cp ${BIT_LIB} /usr/local/lib
+if [ "$(uname)" == "Darwin" ]; then
+    cp ${BIT_LIB} /usr/local/lib
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    sudo cp ${BIT_LIB} /usr/local/lib
+
 
 popd &> /dev/null
 
