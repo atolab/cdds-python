@@ -141,7 +141,6 @@ class Runtime:
         self.ddslib.dds_qset_ownership.argtypes = [c_void_p, c_uint32]
 
         self.ddslib.dds_qset_ownership_strength.restype = None
-        self.ddslib.dds_qset_ownership_strength.restype = None
         self.ddslib.dds_qset_ownership_strength.argtypes = [c_void_p, c_uint32]
 
         # -- read / take --
