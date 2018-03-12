@@ -19,7 +19,6 @@ if [ "$(uname)" == "Darwin" ]; then
     cp ${BIT_LIB} /usr/local/lib
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     sudo cp ${BIT_LIB} /usr/local/lib
-
+fi
 
 popd &> /dev/null
-
