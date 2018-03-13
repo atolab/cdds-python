@@ -47,7 +47,7 @@ def not_alive_instance_samples():
 
 
 class FlexyReader:
-    def __init__(self, sub, flexy_topic, flexy_data_listener = None, ps = None):
+    def __init__(self, sub, flexy_topic, flexy_data_listener=None, ps=None):
         self.rt = Runtime.get_runtime()
         self.dp = sub.dp
         self.sub = sub
@@ -179,4 +179,5 @@ class FlexyReader:
 
     def wait_history(self, timeout):
         return self.rt.ddslib.dds_reader_wait_for_historical_data(self.handle, timeout)
+
 

@@ -8,10 +8,6 @@ class FlexyWriter:
         self.dp = pub.dp
         self.qos = self.rt.to_rw_qos(ps)
         self.handle = self.rt.ddslib.dds_create_writer(pub.handle, flexy_topic.topic, self.qos, None)
-        # if (kind is None) or (kind == DDS_State):
-        #     self.handle = self.rt.stublib.s_create_state_writer(pub.handle, flexy_topic.topic)
-        # else:
-        #     self.handle = self.rt.stublib.s_create_event_writer(pub.handle, flexy_topic.topic)
 
         assert (self.handle > 0)
         self.keygen = flexy_topic.gen_key
@@ -21,7 +17,8 @@ class FlexyWriter:
         kh = KeyHolder(gk)
         key = jsonpickle.encode(kh)
         value = jsonpickle.encode(s)
-        self.rt.stublib.s_write_key_value(self.handle, key.encode(), value.encode())
+        sample = DDSKeyValue(key.encode(), value.encode())
+        self.rt.ddslib.dds_write(self.handle, byref(sample))
 
     def write_all(self, xs):
         for x in xs:
@@ -32,7 +29,24 @@ class FlexyWriter:
         kh = KeyHolder(gk)
         key = jsonpickle.encode(kh)
         value = jsonpickle.encode(s)
-        x = DDSKeyValue(key.encode(), value.encode())
-        self.rt.ddslib.dds_dispose(self.handle, byref(x))
+        sample = DDSKeyValue(key.encode(), value.encode())
+        self.rt.ddslib.dds_dispose(self.handle, byref(sample))
 
 
+class Writer:
+    def __init__(self, pub, topic, ps = None):
+        self.rt = Runtime.get_runtime()
+        self.dp = pub.dp
+        self.qos = self.rt.to_rw_qos(ps)
+        self.handle = self.rt.ddslib.dds_create_writer(pub.handle, topic.topic, self.qos, None)
+        assert (self.handle > 0)
+
+    def write(self, s):
+        self.rt.ddslib.dds_write(self.handle, byref(s))
+
+    def write_all(self, xs):
+        for x in xs:
+            self.write(x)
+
+    def dispose_instance(self, s):
+        self.rt.ddslib.dds_dispose(self.handle, byref(s))

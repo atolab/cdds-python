@@ -11,6 +11,7 @@ endif()
 include_directories(
         "/usr/local/include"
 )
+
 link_directories("/usr/local/lib")
 
 # This is a convenience function, provided by the CycloneDDS package,
@@ -22,10 +23,8 @@ idlc_generate(ddsbit bit.idl)
 # Both executables have only one related source file.
 
 add_library(ddstubs SHARED dds_stubs.c)
-add_executable(test_stub test_stub.c)
 
 
 # Both executables need to be linked to the idl data type library and
 # the ddsc API library.
 target_link_libraries(ddstubs ddsbit CycloneDDS::ddsc)
-target_link_libraries(test_stub ddstubs ddsbit CycloneDDS::ddsc)

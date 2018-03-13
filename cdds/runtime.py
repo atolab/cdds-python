@@ -31,85 +31,85 @@ class Runtime:
 
         ### Stub API
 
-        # dds_entity_t s_create_participant(int id)
-        self.stublib.s_create_participant.restype = dds_entity_t
-        self.stublib.s_create_participant.argtypes = [dds_domainid_t]
-
-        # dds_entity_t s_create_topic_sksv(dds_entity_t dp, const char * name);
-        self.stublib.s_create_topic_sksv.restype = dds_entity_t
-        self.stublib.s_create_topic_sksv.argtypes = [dds_entity_t, c_char_p]
-
-        # dds_entity_t s_create_topic_sv(dds_entity_t dp, const char * name);
-        self.stublib.s_create_topic_sv.restype = dds_entity_t
-        self.stublib.s_create_topic_sv.argtypes = [dds_entity_t, c_char_p]
-
-        # dds_entity_t s_create_pub(dds_entity_t dp);
-        self.stublib.s_create_pub.restype = dds_entity_t
-        self.stublib.s_create_pub.argtypes = [dds_entity_t]
-
-        # dds_entity_t s_create_sub(dds_entity_t dp);
-        self.stublib.s_create_sub.restype = dds_entity_t
-        self.stublib.s_create_sub.argtypes = [dds_entity_t]
-
-        # dds_entity_t s_create_pub_wp(dds_entity_t dp, const char * partition);
-        self.stublib.s_create_pub.restype = dds_entity_t
-        self.stublib.s_create_pub.argtypes = [dds_entity_t, c_char_p]
-
-        # dds_entity_t s_create_sub_wp(dds_entity_t dp, const char * partition);
-        self.stublib.s_create_sub_wp.restype = dds_entity_t
-        self.stublib.s_create_sub_wp.argtypes = [dds_entity_t, c_char_p]
-
-        # dds_entity_t s_create_state_reader(dds_entity_t  s, dds_entity_t  t);
-        self.stublib.s_create_state_reader.restype = dds_entity_t
-        self.stublib.s_create_state_reader.argtypes = [dds_entity_t, dds_entity_t]
-
-        # dds_entity_t s_create_event_reader(dds_entity_t  s, dds_entity_t t);
-        self.stublib.s_create_event_reader.restype = dds_entity_t
-        self.stublib.s_create_event_reader.argtypes = [dds_entity_t, dds_entity_t]
-
-        # dds_entity_t s_create_state_reader_wl(dds_entity_t s, dds_entity_t t, dds_on_data_available_fn f);
-        self.stublib.s_create_state_reader_wl.restype = dds_entity_t
-        self.stublib.s_create_state_reader_wl.argtypes = [dds_entity_t, dds_entity_t, dds_listener_p_t]
-
-        # dds_entity_t s_create_event_reader_wl(dds_entity_t s, dds_entity_t t, dds_on_data_available_fn f);
-        self.stublib.s_create_event_reader_wl.restype = dds_entity_t
-        self.stublib.s_create_event_reader_wl.argtypes = [dds_entity_t, dds_entity_t, dds_listener_p_t]
-
-        # dds_entity_t s_create_state_writer(dds_entity_t  s, dds_entity_t  t);
-        self.stublib.s_create_state_writer.restype = dds_entity_t
-        self.stublib.s_create_state_writer.argtypes = [dds_entity_t, dds_entity_t]
-
-        # dds_entity_t s_create_event_writer(dds_entity_t  s, dds_entity_t t);
-        self.stublib.s_create_event_writer.restype = dds_entity_t
-        self.stublib.s_create_event_writer.argtypes = [dds_entity_t, dds_entity_t]
-
-        # int s_write_sksv(dds_entity_t w, const dds_bit_SKeySValue * v);
-        self.stublib.s_write_sksv.restype = c_int
-        self.stublib.s_write_sksv.argtypes = [dds_entity_t, POINTER(DDSKeyValue)]
-
-        # int s_write_sv(dds_entity_t  w, const dds_bit_SValue * v);
-        self.stublib.s_write_sv.restype = c_int
-        self.stublib.s_write_sv.argtypes = [dds_entity_t, POINTER(DDSValue)]
-
-        # int s_write_key_value(dds_entity_t w, const char * key, const char * value);
-        self.stublib.s_write_key_value.restype = c_int
-        self.stublib.s_write_key_value.argtypes = [dds_entity_t, c_char_p, c_char_p]
-
-        # int s_write_value(dds_entity_t w, const char * value);
-        self.stublib.s_write_value.restype = c_int
-        self.stublib.s_write_value.argtypes = [dds_entity_t, c_char_p]
-
-        # dds_bit_SKeySValue * s_take_sksv(dds_entity_t r);
-        self.stublib.s_take_sksv.restype = POINTER(DDSKeyValue)
-        self.stublib.s_take_sksv.argtypes = [dds_entity_t]
-
-        # int s_take_sksv_a(dds_entity_t r, dds_bit_SKeySValue * sample);
-        self.stublib.s_take_sksv_a.restype = c_int
-        self.stublib.s_take_sksv_a.argtypes = [dds_entity_t, POINTER(DDSKeyValue)]
-
-        # dds_bit_SValue * s_take_sv(dds_entity_t r);
-        self.stublib.s_take_sv.restype = POINTER(DDSKeyValue)
-        self.stublib.s_take_sv.argtypes = [dds_entity_t]
+        # # dds_entity_t s_create_participant(int id)
+        # self.stublib.s_create_participant.restype = dds_entity_t
+        # self.stublib.s_create_participant.argtypes = [dds_domainid_t]
+        #
+        # # dds_entity_t s_create_topic_sksv(dds_entity_t dp, const char * name);
+        # self.stublib.s_create_topic_sksv.restype = dds_entity_t
+        # self.stublib.s_create_topic_sksv.argtypes = [dds_entity_t, c_char_p]
+        #
+        # # dds_entity_t s_create_topic_sv(dds_entity_t dp, const char * name);
+        # self.stublib.s_create_topic_sv.restype = dds_entity_t
+        # self.stublib.s_create_topic_sv.argtypes = [dds_entity_t, c_char_p]
+        #
+        # # dds_entity_t s_create_pub(dds_entity_t dp);
+        # self.stublib.s_create_pub.restype = dds_entity_t
+        # self.stublib.s_create_pub.argtypes = [dds_entity_t]
+        #
+        # # dds_entity_t s_create_sub(dds_entity_t dp);
+        # self.stublib.s_create_sub.restype = dds_entity_t
+        # self.stublib.s_create_sub.argtypes = [dds_entity_t]
+        #
+        # # dds_entity_t s_create_pub_wp(dds_entity_t dp, const char * partition);
+        # self.stublib.s_create_pub.restype = dds_entity_t
+        # self.stublib.s_create_pub.argtypes = [dds_entity_t, c_char_p]
+        #
+        # # dds_entity_t s_create_sub_wp(dds_entity_t dp, const char * partition);
+        # self.stublib.s_create_sub_wp.restype = dds_entity_t
+        # self.stublib.s_create_sub_wp.argtypes = [dds_entity_t, c_char_p]
+        #
+        # # dds_entity_t s_create_state_reader(dds_entity_t  s, dds_entity_t  t);
+        # self.stublib.s_create_state_reader.restype = dds_entity_t
+        # self.stublib.s_create_state_reader.argtypes = [dds_entity_t, dds_entity_t]
+        #
+        # # dds_entity_t s_create_event_reader(dds_entity_t  s, dds_entity_t t);
+        # self.stublib.s_create_event_reader.restype = dds_entity_t
+        # self.stublib.s_create_event_reader.argtypes = [dds_entity_t, dds_entity_t]
+        #
+        # # dds_entity_t s_create_state_reader_wl(dds_entity_t s, dds_entity_t t, dds_on_data_available_fn f);
+        # self.stublib.s_create_state_reader_wl.restype = dds_entity_t
+        # self.stublib.s_create_state_reader_wl.argtypes = [dds_entity_t, dds_entity_t, dds_listener_p_t]
+        #
+        # # dds_entity_t s_create_event_reader_wl(dds_entity_t s, dds_entity_t t, dds_on_data_available_fn f);
+        # self.stublib.s_create_event_reader_wl.restype = dds_entity_t
+        # self.stublib.s_create_event_reader_wl.argtypes = [dds_entity_t, dds_entity_t, dds_listener_p_t]
+        #
+        # # dds_entity_t s_create_state_writer(dds_entity_t  s, dds_entity_t  t);
+        # self.stublib.s_create_state_writer.restype = dds_entity_t
+        # self.stublib.s_create_state_writer.argtypes = [dds_entity_t, dds_entity_t]
+        #
+        # # dds_entity_t s_create_event_writer(dds_entity_t  s, dds_entity_t t);
+        # self.stublib.s_create_event_writer.restype = dds_entity_t
+        # self.stublib.s_create_event_writer.argtypes = [dds_entity_t, dds_entity_t]
+        #
+        # # int s_write_sksv(dds_entity_t w, const dds_bit_SKeySValue * v);
+        # self.stublib.s_write_sksv.restype = c_int
+        # self.stublib.s_write_sksv.argtypes = [dds_entity_t, POINTER(DDSKeyValue)]
+        #
+        # # int s_write_sv(dds_entity_t  w, const dds_bit_SValue * v);
+        # self.stublib.s_write_sv.restype = c_int
+        # self.stublib.s_write_sv.argtypes = [dds_entity_t, POINTER(DDSValue)]
+        #
+        # # int s_write_key_value(dds_entity_t w, const char * key, const char * value);
+        # self.stublib.s_write_key_value.restype = c_int
+        # self.stublib.s_write_key_value.argtypes = [dds_entity_t, c_char_p, c_char_p]
+        #
+        # # int s_write_value(dds_entity_t w, const char * value);
+        # self.stublib.s_write_value.restype = c_int
+        # self.stublib.s_write_value.argtypes = [dds_entity_t, c_char_p]
+        #
+        # # dds_bit_SKeySValue * s_take_sksv(dds_entity_t r);
+        # self.stublib.s_take_sksv.restype = POINTER(DDSKeyValue)
+        # self.stublib.s_take_sksv.argtypes = [dds_entity_t]
+        #
+        # # int s_take_sksv_a(dds_entity_t r, dds_bit_SKeySValue * sample);
+        # self.stublib.s_take_sksv_a.restype = c_int
+        # self.stublib.s_take_sksv_a.argtypes = [dds_entity_t, POINTER(DDSKeyValue)]
+        #
+        # # dds_bit_SValue * s_take_sv(dds_entity_t r);
+        # self.stublib.s_take_sv.restype = POINTER(DDSKeyValue)
+        # self.stublib.s_take_sv.argtypes = [dds_entity_t]
 
         # -- Participant Operations --
         self.ddslib.dds_create_participant.restype = dds_entity_t
