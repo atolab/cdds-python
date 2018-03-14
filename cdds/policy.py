@@ -78,8 +78,8 @@ class AutoInstanceDispose(Policy):
         self.auto_dispose = True
 
 
-DDS_V_State = [Reliable(), KeepLastHistory(1), Volatile()]
-DDS_TL_State = [Reliable(), KeepLastHistory(1), TransientLocal()]
+DDS_V_State = [Reliable(), KeepLastHistory(1), Volatile(), ManualInstanceDispose()]
+DDS_TL_State = [Reliable(), KeepLastHistory(1), TransientLocal(), ManualInstanceDispose()]
 DDS_State = DDS_V_State
 
-DDS_Event = [Reliable(), KeepAllHistory()]
+DDS_Event = [Reliable(), KeepAllHistory(), ManualInstanceDispose()]
