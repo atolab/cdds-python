@@ -10,7 +10,9 @@ def trampoline_on_liveliness_changed(r, s, a):
 @DATA_AVAILABLE_PROTO
 def trampoline_on_data_available(r, a):
     print("[python-cdds]:>>  Dispatching Data Available ")
-    Runtime.dispatch_data_listener(r)
+    import  threading
+    threading.Thread(target=Runtime.dispatch_data_listener, args=(r))
+    #Runtime.dispatch_data_listener(r)
 
 @SUBSCRIPTION_MATCHED_PROTO
 def trampoline_on_subscription_matched(e, s, a):
