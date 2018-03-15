@@ -181,6 +181,9 @@ class Runtime:
         self.ddslib.dds_qset_ownership_strength.restype = None
         self.ddslib.dds_qset_ownership_strength.argtypes = [dds_qos_p_t, c_uint32]
 
+        self.ddslib.dds_qset_destination_order.restype = None
+        self.ddslib.dds_qset_destination_order.argtypes = [dds_qos_p_t, c_uint32]
+
         # -- read / take --
         self.ddslib.dds_read_mask.restype = c_int
         self.ddslib.dds_read_mask.argtypes = [dds_entity_t, POINTER(c_void_p), POINTER(SampleInfo), c_size_t, c_uint32, c_uint32]
@@ -318,6 +321,8 @@ class Runtime:
                     self.ddslib.dds_qset_ownership_strength(qos, p.strength)
             elif p.id == DDS_WRITERDATALIFECYCLE_QOS_POLICY_ID:
                 self.ddslib.dds_qset_writer_data_lifecycle(qos, p.auto_dispose)
+            elif p.id == DDS_DESTINATIONORDER_QOS_POLICY_ID:
+                self.ddslib.dds_qset_destination_order(qos, p.kind)
         return qos
 
 

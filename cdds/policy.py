@@ -78,8 +78,19 @@ class AutoInstanceDispose(Policy):
         self.auto_dispose = True
 
 
-DDS_V_State = [Reliable(), KeepLastHistory(1), Volatile(), ManualInstanceDispose()]
-DDS_TL_State = [Reliable(), KeepLastHistory(1), TransientLocal(), ManualInstanceDispose()]
+class ReceptionTimestampOrder(Policy):
+    def __init__(self):
+        Policy.__init__(self, DDS_DESTINATIONORDER_QOS_POLICY_ID)
+        self.kind = DDS_DESTINATIONORDER_BY_RECEPTION_TIMESTAMP
+
+class SourceTimestampOrder(Policy):
+    def __init__(self):
+        Policy.__init__(self, DDS_DESTINATIONORDER_QOS_POLICY_ID)
+        self.kind = DDS_DESTINATIONORDER_BY_SOURCE_TIMESTAMP
+
+
+DDS_V_State = [Reliable(), KeepLastHistory(1), Volatile(), ManualInstanceDispose(), SourceTimestampOrder()]
+DDS_TL_State = [Reliable(), KeepLastHistory(1), TransientLocal(), ManualInstanceDispose(), SourceTimestampOrder()]
 DDS_State = DDS_V_State
 
-DDS_Event = [Reliable(), KeepAllHistory(), ManualInstanceDispose()]
+DDS_Event = [Reliable(), KeepAllHistory(), ManualInstanceDispose(), SourceTimestampOrder()]

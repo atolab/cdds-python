@@ -4,18 +4,22 @@ from .runtime import Runtime
 
 @LIVELINESS_CHANGED_PROTO
 def trampoline_on_liveliness_changed(r, s, a):
+    print("[python-cdds]:>>  Dispatching Liveliness change")
     Runtime.dispatch_liveliness_changed_listener(r, s)
 
 @DATA_AVAILABLE_PROTO
 def trampoline_on_data_available(r, a):
+    print("[python-cdds]:>>  Dispatching Data Available ")
     Runtime.dispatch_data_listener(r)
 
 @SUBSCRIPTION_MATCHED_PROTO
 def trampoline_on_subscription_matched(e, s, a):
+    print("[python-cdds]:>>  Dispatching Subscription Match")
     Runtime.dispatch_subscription_matched_listener(e, s)
 
 @SAMPLE_LOST_PROTO
 def trampoline_on_sample_lost(e, s, a):
+    print("[python-cdds]:>>  Dispatching Sample Lost")
     global logger
     logger.debug('DefaultListener', '>> Sample Lost')
 
