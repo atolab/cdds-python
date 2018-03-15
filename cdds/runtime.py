@@ -247,6 +247,12 @@ class Runtime:
         self.ddslib.dds_lset_subscription_matched.restype = None
         self.ddslib.dds_lset_subscription_matched.argtypes = [dds_listener_p_t, SUBSCRIPTION_MATCHED_PROTO]
 
+        self.ddslib.dds_alloc.restype = c_void_p
+        self.ddslib.dds_alloc.argtypes = [c_size_t]
+
+        self.ddslib.dds_free.restype = None
+        self.ddslib.dds_free.argtypes = [c_void_p]
+
         global the_runtime
         the_runtime = self
 
