@@ -74,19 +74,18 @@ class ManualInstanceDispose(Policy):
 
 class AutoInstanceDispose(Policy):
     def __init__(self):
-        Policy.__init__(self, DDS_WRITERDATALIFECYCLE_QOS_POLICY_ID)
+        Policy.__init__(self, DDS_WRITERDATALIFECYCLE_QOS_POLICY_ID, None)
         self.auto_dispose = True
 
 
 class ReceptionTimestampOrder(Policy):
     def __init__(self):
-        Policy.__init__(self, DDS_DESTINATIONORDER_QOS_POLICY_ID)
-        self.kind = DDS_DESTINATIONORDER_BY_RECEPTION_TIMESTAMP
+        Policy.__init__(self, DDS_DESTINATIONORDER_QOS_POLICY_ID, DDS_DESTINATIONORDER_BY_RECEPTION_TIMESTAMP)
 
 class SourceTimestampOrder(Policy):
     def __init__(self):
-        Policy.__init__(self, DDS_DESTINATIONORDER_QOS_POLICY_ID)
-        self.kind = DDS_DESTINATIONORDER_BY_SOURCE_TIMESTAMP
+        Policy.__init__(self, DDS_DESTINATIONORDER_QOS_POLICY_ID, DDS_DESTINATIONORDER_BY_SOURCE_TIMESTAMP)
+
 
 
 DDS_V_State = [Reliable(), KeepLastHistory(1), Volatile(), ManualInstanceDispose(), SourceTimestampOrder()]
