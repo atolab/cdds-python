@@ -28,7 +28,6 @@ Once the dependencies are intalled simply do (assuming your are running on Linux
 	$ ./configure
 	$ python3 setup.py install 
 
-
 To test your installation do:
 
 
