@@ -23,11 +23,14 @@ Regardless of the kinds of type definition interoperability and instance managem
 as
 Once the dependencies are intalled simply do (assuming your are running on Linux):
 
+
 	$ cd python-cdds
 	$ ./configure
 	$ python3 setup.py install 
 
+
 To test your installation do:
+
 
 	$ python3 test_flexy_writer.py 
 	$ python3 test_flexy_reader.py 
