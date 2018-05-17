@@ -49,8 +49,8 @@ def testDynaTypes():
     #     for s in samples:
     #         if s[1].valid_data:
     #             print('reader>> {0})'.format(s[0]))
-
-    time.sleep(60)
+    while True:
+        time.sleep(60)
 
 if __name__ == '__main__':
     testDynaTypes()
