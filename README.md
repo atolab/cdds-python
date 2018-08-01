@@ -17,16 +17,18 @@ Regardless of the kinds of type definition interoperability and instance managem
 ## Installation
 **pydds** depends on:
 
-- [**jsonpikle**](https://github.com/jsonpickle/jsonpickle), please refer to the project page for installation informations.
+- [**jsonpickle**](https://github.com/jsonpickle/jsonpickle), please refer to the project page for installation informations.
 
 - [**Cyclone DDS**](https://github.com/atolab/cdds), refer to the installation instructions to see how to get it set up.
 as
 Once the dependencies are intalled simply do (assuming your are running on Linux):
 
+```
+$ cd python-cdds
+$ ./configure
+$ python3 setup.py install 
+```
 
-	$ cd python-cdds
-	$ ./configure
-	$ python3 setup.py install 
 
 The setup my requires admin rights on some plartforms.
 
