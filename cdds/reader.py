@@ -93,7 +93,10 @@ class FlexyReader:
         self.rt.register_liveliness_changed_listener(self.handle, self.__handle_liveliness_change)
 
     def __handle_data(self, r):
-        self.data_listener(self)
+        from threading import Thread
+        t = Thread(target=self.data_listener, args=(self,))
+        t.start()
+        # self.data_listener(self)
 
     def __handle_sub_matched(self, r, s):
         self.subsciption_listener(self, s)
