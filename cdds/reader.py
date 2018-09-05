@@ -96,6 +96,7 @@ class FlexyReader:
         from threading import Thread
         t = Thread(target=self.data_listener, args=(self,))
         t.start()
+        do_nothing(self)
         # self.data_listener(self)
 
     def __handle_sub_matched(self, r, s):
