@@ -88,8 +88,8 @@ class SourceTimestampOrder(Policy):
 
 
 
-DDS_V_State = [Reliable(dds_secs(3600)), KeepLastHistory(1), Volatile(), ManualInstanceDispose(), SourceTimestampOrder()]
-DDS_TL_State = [Reliable(dds_secs(3600)), KeepLastHistory(1), TransientLocal(), ManualInstanceDispose(), SourceTimestampOrder()]
+DDS_V_State = [Reliable(dds_secs(1)), KeepLastHistory(1), Volatile(), ManualInstanceDispose(), SourceTimestampOrder()]
+DDS_TL_State = [Reliable(dds_secs(1)), KeepLastHistory(1), TransientLocal(), ManualInstanceDispose(), SourceTimestampOrder()]
 DDS_State = DDS_V_State
 
-DDS_Event = [Reliable(dds_secs(3600)), KeepAllHistory(), ManualInstanceDispose(), SourceTimestampOrder()]
+DDS_Event = [Reliable(dds_secs(1)), KeepAllHistory(), ManualInstanceDispose(), SourceTimestampOrder()]
