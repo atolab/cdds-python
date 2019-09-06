@@ -70,7 +70,7 @@ class FlexyReader:
 
         topic = self.flexy_topic.topic
 
-        self.listener_handle = self.rt.ddslib.dds_listener_create(None)
+        self.listener_handle = self.rt.ddslib.dds_create_listener(None)
         self.rt.ddslib.dds_lset_data_available(self.listener_handle , trampoline_on_data_available)
         self.rt.ddslib.dds_lset_liveliness_changed(self.listener_handle, trampoline_on_liveliness_changed)
         self.rt.ddslib.dds_lset_subscription_matched(self.listener_handle, trampoline_on_subscription_matched)

@@ -73,11 +73,11 @@ class Runtime:
         self.ddslib.dds_create_writer.argtypes = [dds_entity_t, dds_entity_t, dds_qos_p_t, dds_listener_p_t]
 
         # -- QoS operations --
-        self.ddslib.dds_qos_create.restype = dds_qos_p_t
-        self.ddslib.dds_qos_create.argtypes = []
+        self.ddslib.dds_create_qos.restype = dds_qos_p_t
+        self.ddslib.dds_create_qos.argtypes = []
 
-        self.ddslib.dds_qos_delete.restype = None
-        self.ddslib.dds_qos_delete.argtypes = [dds_qos_p_t]
+        self.ddslib.dds_delete_qos.restype = None
+        self.ddslib.dds_delete_qos.argtypes = [dds_qos_p_t]
 
         self.ddslib.dds_qset_durability.restype = None
         self.ddslib.dds_qset_durability.argtypes = [dds_qos_p_t, c_uint32]
@@ -117,14 +117,14 @@ class Runtime:
 
         # -- dispoase --
 
-        self.ddslib.dds_dispose.restype = c_uint
+        self.ddslib.dds_dispose.restype = dds_return_t
         self.ddslib.dds_dispose.argtypes = [dds_entity_t, c_void_p]
 
-        self.ddslib.dds_write.restype = c_uint
+        self.ddslib.dds_write.restype = dds_return_t
         self.ddslib.dds_write.argtypes = [dds_entity_t, c_void_p]
 
         # DDS Entity Delete
-        self.ddslib.dds_delete.restype = c_uint
+        self.ddslib.dds_delete.restype = dds_return_t
         self.ddslib.dds_delete.argtypes = [dds_entity_t]
 
         # -- Waitset Operations --
@@ -134,13 +134,13 @@ class Runtime:
 
 
         # attach / detach
-        self.ddslib.dds_waitset_attach.restype = c_int
+        self.ddslib.dds_waitset_attach.restype = dds_return_t
         self.ddslib.dds_waitset_attach.argtypes = [dds_entity_t, dds_entity_t, dds_attach_t]
-        self.ddslib.dds_waitset_detach.restype = c_int
+        self.ddslib.dds_waitset_detach.restype = dds_return_t
         self.ddslib.dds_waitset_detach.argtypes = [dds_entity_t, dds_entity_t]
 
         # wait
-        self.ddslib.dds_waitset_wait.restype = c_int
+        self.ddslib.dds_waitset_wait.restype = dds_return_t
         self.ddslib.dds_waitset_wait.argtypes = [dds_entity_t, POINTER(dds_attach_t), c_size_t, dds_duration_t]
 
         # -- Condition Operations --
@@ -148,11 +148,11 @@ class Runtime:
         self.ddslib.dds_create_readcondition.argtypes = [dds_entity_t, c_uint32]
 
         # -- Listeners --
-        self.ddslib.dds_listener_create.restype = dds_listener_p_t
-        self.ddslib.dds_listener_create.argtypes = [c_void_p]
+        self.ddslib.dds_create_listener.restype = dds_listener_p_t
+        self.ddslib.dds_create_listener.argtypes = [c_void_p]
 
-        self.ddslib.dds_listener_delete.restype = None
-        self.ddslib.dds_listener_delete.argtypes = [dds_listener_p_t]
+        self.ddslib.dds_delete_listener.restype = None
+        self.ddslib.dds_delete_listener.argtypes = [dds_listener_p_t]
 
         self.ddslib.dds_lset_data_available.restype = None
         self.ddslib.dds_lset_data_available.argtypes = [dds_listener_p_t, DATA_AVAILABLE_PROTO]
@@ -256,11 +256,14 @@ class Runtime:
         return qos
 
     def create_dds_qos(self):
-        return c_void_p(self.ddslib.dds_qos_create())
+        return c_void_p(self.ddslib.dds_create_qos())
 
     def release_dds_qos(self, qos):
-        self.ddslib.dds_qos_delete(qos)
+        self.ddslib.dds_delete_qos(qos)
 
 
     def close(self):
-        self.ddslib.dds_fini()
+        # Magic value is DDS_CYCLONEDDS_HANDLE, so this tears down
+        # the entire Cyclone run-time in a supported way once that
+        # bit is merged in. Until then, there is no supported way.
+        self.ddslib.dds_delete(2147418368)

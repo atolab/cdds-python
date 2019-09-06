@@ -147,8 +147,7 @@ class SampleInfo(Structure):
                 ('no_writer_generation_count', c_uint32),
                 ('sample_rank', c_uint32),
                 ('generation_rank', c_uint32),
-                ('absolute_generation_rank', c_uint32),
-                ('reception_timestamp', c_int64)]
+                ('absolute_generation_rank', c_uint32)]
 
     def is_new_sample(self):
         return self.sample_state == DDS_NOT_READ_SAMPLE_STATE
@@ -173,7 +172,7 @@ dds_entity_t = c_int32
 dds_time_t = c_int64
 dds_duration_t = c_int64
 dds_instance_handle_t = c_int64
-dds_domainid_t = c_int32
+dds_domainid_t = c_uint32
 dds_sample_state_t = c_int
 dds_view_state_t = c_int
 dds_instance_state_t = c_int

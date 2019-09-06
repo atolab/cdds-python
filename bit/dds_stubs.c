@@ -7,7 +7,7 @@
 
 dds_qos_t*
 create_dds_state_qos(int32_t depth) {
-  dds_qos_t* state_qos = dds_qos_create();
+  dds_qos_t* state_qos = dds_create_qos();
   dds_qset_reliability(state_qos, DDS_RELIABILITY_RELIABLE, DDS_INFINITY);
   dds_qset_durability(state_qos, DDS_DURABILITY_VOLATILE);
   dds_qset_history(state_qos, DDS_HISTORY_KEEP_LAST, depth);
@@ -20,7 +20,7 @@ dds_qos_t* create_dds_v_state_qos(int32_t depth) {
 }
 
 dds_qos_t* create_dds_tl_state_qos(int32_t depth) {
-  dds_qos_t* state_qos = dds_qos_create();
+  dds_qos_t* state_qos = dds_create_qos();
   dds_qset_reliability(state_qos, DDS_RELIABILITY_RELIABLE, DDS_INFINITY);
   dds_qset_durability(state_qos, DDS_DURABILITY_TRANSIENT_LOCAL);
   dds_qset_history(state_qos, DDS_HISTORY_KEEP_LAST, depth);
@@ -30,7 +30,7 @@ dds_qos_t* create_dds_tl_state_qos(int32_t depth) {
 
 dds_qos_t*
 create_dds_event_qos() {
-  dds_qos_t* event_qos = dds_qos_create();
+  dds_qos_t* event_qos = dds_create_qos();
   dds_qset_reliability(event_qos, DDS_RELIABILITY_RELIABLE, DDS_INFINITY);
   dds_qset_history(event_qos, DDS_HISTORY_KEEP_ALL, DDS_LENGTH_UNLIMITED);
   return event_qos;
@@ -90,7 +90,7 @@ s_create_topic_sv(dds_entity_t dp, const char* name) {
 
 dds_entity_t
 s_create_pub_wp(dds_entity_t dp, const char* partition) {
-  dds_qos_t* qos = dds_qos_create();
+  dds_qos_t* qos = dds_create_qos();
   const char * ps[1] = { partition };
   dds_qset_partition(qos, 1, &ps[0]);
   return dds_create_publisher(dp, qos, NULL);
@@ -98,7 +98,7 @@ s_create_pub_wp(dds_entity_t dp, const char* partition) {
 
 dds_entity_t
 s_create_sub_wp(dds_entity_t dp, const char* partition) {
-  dds_qos_t* qos = dds_qos_create();
+  dds_qos_t* qos = dds_create_qos();
   const char * ps[1] = { partition };
   dds_qset_partition(qos, 1, &ps[0]);
   return dds_create_subscriber(dp, qos, NULL);
@@ -147,7 +147,7 @@ s_create_event_reader_wl(dds_entity_t s, dds_entity_t t,  dds_listener_t* l) {
 
 dds_entity_t
 s_create_state_reader_wf(dds_entity_t s, dds_entity_t t,  dds_on_data_available_fn f) {
-  dds_listener_t* l = dds_listener_create(NULL);
+  dds_listener_t* l = dds_create_listener(NULL);
   dds_lset_data_available(l, f);
   return dds_create_reader(s, t, dds_state_qos(1), l);
 }
@@ -155,7 +155,7 @@ s_create_state_reader_wf(dds_entity_t s, dds_entity_t t,  dds_on_data_available_
 
 dds_entity_t
 s_create_event_reader_wf(dds_entity_t s, dds_entity_t t,  dds_on_data_available_fn  f) {
-  dds_listener_t* l = dds_listener_create(NULL);
+  dds_listener_t* l = dds_create_listener(NULL);
   dds_lset_data_available(l, f);
   return dds_create_reader(s, t, dds_event_qos(), l);
 }
