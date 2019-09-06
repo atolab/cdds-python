@@ -1,7 +1,7 @@
-# Cyclone Python API
+# Cyclone DDS Python API
 
 ## Overview
-**python-cdd** is a simple Python API for Cyclon DDS
+**cdds-python** is a simple Python API for Cyclon DDS
 
 This API supports:
 
@@ -19,7 +19,7 @@ Regardless of the kinds of type definition interoperability and instance managem
 
 - [**jsonpickle**](https://github.com/jsonpickle/jsonpickle), please refer to the project page for installation informations.
 
-- [**Cyclone DDS**](https://github.com/atolab/cdds), refer to the installation instructions to see how to get it set up.
+- [**Cyclone DDS**](https://github.com/eclipse-cyclonedds), refer to the installation instructions to see how to get it set up.
 as
 Once the dependencies are intalled simply do (assuming your are running on Linux):
 
