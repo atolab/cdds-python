@@ -1,7 +1,7 @@
 # Cyclone DDS Python API
 
 ## Overview
-**cdds-python** is a simple Python API for Cyclon DDS
+**cdds-python** is a simple Python API for [Cyclone DDS](https://github.com/eclipse-cyclonedds/cyclonedds#getting-started)
 
 This API supports:
 
